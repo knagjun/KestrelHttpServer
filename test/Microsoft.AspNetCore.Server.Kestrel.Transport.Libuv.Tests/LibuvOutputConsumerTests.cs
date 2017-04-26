@@ -667,7 +667,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             };
             var transportContext = new TestLibuvTransportContext { Log = new LibuvTrace(logger) };
 
-            var frame = new Frame<object>(null, new FrameContext { ServiceContext = serviceContext });
+            var frameContext = new FrameContext
+            {
+                ServiceContext = serviceContext,
+                ConnectionInformation = new MockConnectionInformation
+                {
+                    PipeFactory = _pipeFactory
+                }
+            };
+            var frame = new Frame<object>(null, frameContext);
 
             var socket = new MockSocket(_mockLibuv, _libuvThread.Loop.ThreadId, transportContext.Log);
             var outputProducer = new OutputProducer(pipe.Writer, "0", serviceContext.Log);
