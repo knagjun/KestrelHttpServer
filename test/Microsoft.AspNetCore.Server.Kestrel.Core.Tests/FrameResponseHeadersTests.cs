@@ -73,7 +73,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("šerver", "Data")]
         [InlineData("Server", "Dašta")]
         [InlineData("Unknownš-Header", "Data")]
-        [InlineData("Seršver", "Data")
+        [InlineData("Seršver", "Data")]
         public void AddingControlOrNonAsciiCharactersToHeadersThrows(string key, string value)
         {
             var responseHeaders = new FrameResponseHeaders();
